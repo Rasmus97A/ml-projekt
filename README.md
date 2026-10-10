@@ -8,16 +8,16 @@ An end-to-end ML project on three different problems: tabular data with a target
 
 | Part | Data | Type of problem | Scripts |
 |---|---|---|---|
-| 1. Titanic | 891 passengers (tabular) | Binary classification | `learning_steps/`, `prep.py`, `22_tuning.py` to `27_leaf_sweep.py` |
+| 1. Titanic | 891 passengers (tabular) | Binary classification | `learning_steps/`, `prep.py`, `22_tuning.py` to `29_chi2.py` |
 | 2. Digits | 1,797 images, 8x8 pixels | Multiclass classification | `15_` to `18_` |
 | 3. Customers | 600 customers (synthetic) | No target: clustering, then classification | `19_` to `21_` |
-| App | Titanic model | Deployment | `23_save_model.py`, `app.py` |
+| App | All parts | Interactive dashboard: survival predictor plus 5 pages of charts | `23_save_model.py`, `app.py`, `pages/` |
 
 ## What was done
 
 **Data preparation (Titanic):** filled missing ages with the median and missing ports with the most common value, one-hot encoded the port, label-encoded sex, and dropped identifier and free-text columns. Cabin (77% missing) was dropped.
 
-**EDA:** bar charts, histograms and a correlation matrix. Sex, class and age were the strongest patterns (for example, 97% of 1st-class women survived vs 14% of 3rd-class men). 
+**EDA:** bar charts, histograms and a correlation matrix. Sex, class and age were the strongest patterns (for example, 97% of 1st-class women survived vs 14% of 3rd-class men).
 
 **Statistics:** chi-square tests of independence between survival and sex (p = 1.2e-58), passenger class (p = 4.6e-23) and port of embarkation (p = 1.8e-06). All three are statistically significant, but significance is not proof of cause. The port effect partly overlaps with class (51% of Cherbourg passengers were 1st class vs 20% at Southampton), though class does not explain Queenstown, where 94% were 3rd class but survival was higher than at Southampton.
 
@@ -26,6 +26,8 @@ An end-to-end ML project on three different problems: tabular data with a target
 **Supervised learning:** Logistic Regression, Random Forest, XGBoost, a neural network (scikit-learn MLP) and a CNN (Keras/TensorFlow) for the images.
 
 **Evaluation:** confusion matrices, classification reports, ROC-AUC, precision-recall curves, 5-fold cross-validation, GridSearchCV and the Brier score.
+
+**Dashboard (Streamlit):** a multi-page app with a survival predictor (warns when the input is unusual and rounds the result) and pages for data exploration, Titanic model evaluation, unsupervised learning, the digits models (including a classification report and ROC-AUC for the CNN) and customer segmentation. The pages have interactive controls, for example a checkbox that removes the port columns to show how the clusters change.
 
 ## Results
 
@@ -107,5 +109,7 @@ To start the app:
 py 23_save_model.py
 streamlit run app.py
 ```
+
+The chart pages are in the sidebar. The Digits page trains the CNN the first time it opens, which takes up to a minute.
 
 `19_make_customers.py` must be run before `20_segment.py`, and `20_segment.py` before `21_segment_classifier.py`.
