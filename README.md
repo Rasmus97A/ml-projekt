@@ -17,7 +17,9 @@ An end-to-end ML project on three different problems: tabular data with a target
 
 **Data preparation (Titanic):** filled missing ages with the median and missing ports with the most common value, one-hot encoded the port, label-encoded sex, and dropped identifier and free-text columns. Cabin (77% missing) was dropped.
 
-**EDA:** bar charts, histograms and a correlation matrix. Sex, class and age were the strongest patterns (for example, 97% of 1st-class women survived vs 14% of 3rd-class men).
+**EDA:** bar charts, histograms and a correlation matrix. Sex, class and age were the strongest patterns (for example, 97% of 1st-class women survived vs 14% of 3rd-class men). 
+
+**Statistics:** chi-square tests of independence between survival and sex (p = 1.2e-58), passenger class (p = 4.6e-23) and port of embarkation (p = 1.8e-06). All three are statistically significant, but a significant association is not proof of cause: the port effect is probably explained by class.
 
 **Unsupervised learning:** PCA, t-SNE, UMAP and KMeans on both Titanic and the digits, plus clustering to create a target variable for the customer data.
 
