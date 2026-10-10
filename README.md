@@ -2,7 +2,7 @@
 
 An end-to-end ML project on three different problems: tabular data with a target (Titanic), image data (handwritten digits), and data with no target at all (customer segmentation).
 
-**Author:** YOUR NAME
+**Author:** Rasmus Andersen
 
 ## Contents
 
